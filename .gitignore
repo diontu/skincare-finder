@@ -1,0 +1,7 @@
+#ignore the following:
+
+#dependencies
+/node_modules
+
+#misc
+.env
