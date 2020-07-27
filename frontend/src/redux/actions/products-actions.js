@@ -22,7 +22,7 @@ export const fetch = () => {
     return function(dispatch) {
         dispatch(_fetchProducts());
 
-        return axios.get(path.join(process.env.DOMAIN_NAME, 'products', 'sephora'))
+        return axios.get(path.join(String(process.env.DOMAIN_NAME), 'products', 'sephora'))
             .then(prods => {
                 dispatch(_fetchedProducts(prods));
             })
