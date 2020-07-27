@@ -8,8 +8,8 @@
 # testing
 /coverage
 
-# production
-/build
+# production # has been commented out to allow the build file to be seen by the heroku app.
+# /build
 
 # misc
 .DS_Store
