@@ -1,5 +1,9 @@
 import {FETCH, FETCHED} from './constants';
+
+const path = require('path');
 const axios = require('axios');
+
+require('dotenv').config({path: '../../../../.env'});
 
 const _fetchProducts = () => {
     return {
@@ -18,7 +22,7 @@ export const fetch = () => {
     return function(dispatch) {
         dispatch(_fetchProducts());
 
-        return axios.get('http://localhost:5000/products/sephora')
+        return axios.get(path.join(process.env.DOMAIN_NAME, 'products', 'sephora'))
             .then(prods => {
                 dispatch(_fetchedProducts(prods));
             })
