@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const productsRouter = require('./api/routes/products.route');
 
 require('dotenv').config();
@@ -7,6 +8,7 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+app.use(cors());
 app.use(express.json()); // parses JSON requests and places them in request.body
 
 // connect with the DB
