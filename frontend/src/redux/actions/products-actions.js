@@ -7,7 +7,7 @@ require('dotenv').config({path: '../../../../.env'});
 
 var DOMAIN_NAME = process.env.REACT_APP_DOMAIN_NAME;
 
-if (process.env.DOMAIN_NAME === 'prod') {
+if (process.env.MODE === 'prod') {
     DOMAIN_NAME = process.env.DOMAIN_NAME;
 }
 
