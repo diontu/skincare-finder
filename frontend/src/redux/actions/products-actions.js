@@ -5,10 +5,11 @@ const axios = require('axios');
 
 require('dotenv').config({path: '../../../../.env'});
 
-// const DOMAIN_NAME = process.env.DOMAIN_NAME || process.env.REACT_APP_DOMAIN_NAME;
-const DOMAIN_NAME = process.env.DOMAIN_NAME;
+var DOMAIN_NAME = process.env.REACT_APP_DOMAIN_NAME;
 
-console.log(process.env.DOMAIN_NAME);
+if (process.env.DOMAIN_NAME === 'prod') {
+    DOMAIN_NAME = process.env.DOMAIN_NAME;
+}
 
 axios.defaults.baseURL = String(DOMAIN_NAME);
 
