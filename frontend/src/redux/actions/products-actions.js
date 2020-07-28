@@ -5,7 +5,7 @@ const axios = require('axios');
 
 require('dotenv').config({path: '../../../../.env'});
 
-const DOMAIN_NAME = process.env.REACT_APP_DOMAIN_NAME || process.env.DOMAIN_NAME;
+const DOMAIN_NAME = process.env.DOMAIN_NAME || process.env.REACT_APP_DOMAIN_NAME;
 
 axios.defaults.baseURL = String(DOMAIN_NAME);
 

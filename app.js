@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json()); // parses JSON requests and places them in request.body
 
-if (process.env.MODE === String('prod')) {
+if (process.env.MODE === 'prod') {
     app.use(express.static(path.join(__dirname, 'frontend', 'build')));
 
     app.get('/*', (req, res) => {
