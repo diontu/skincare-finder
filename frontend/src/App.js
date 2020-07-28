@@ -6,19 +6,12 @@ import { connect } from 'react-redux';
 
 import Loading from './components/Loading';
 
-const useFetch = (fetchActionCreator) => {
-  useEffect(() => {
-    fetchActionCreator();
-  }, []);
-};
-
-const mapDispatch = {
-  fetch
-};
-
 function App(props) {
 
-  useFetch(props.fetch);
+  // having the empty array as the second param makes it only run once
+  useEffect(() => {
+    props.fetchProds();
+  }, []);
 
   const products = useSelector(state => state.products); // takes the products from the state
   const isLoaded = useSelector(state => state.hasFetchedProducts); // gets the state of the 
@@ -30,23 +23,18 @@ function App(props) {
   );
 }
 
-export default connect(null, mapDispatch)(App);
-
-
-// for a class component
-
 // const mapStateToProps = (state) => {
 //   return {
 //     state,
 //   };
 // };
 
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     fetchProds: () => {
-//       dispatch(fetchProducts());
-//     }
-//   };
-// };
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchProds: () => {
+      dispatch(fetch());
+    }
+  };
+};
 
-// export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(null, mapDispatchToProps)(App);

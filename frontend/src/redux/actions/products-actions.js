@@ -5,6 +5,10 @@ const axios = require('axios');
 
 require('dotenv').config({path: '../../../../.env'});
 
+const DOMAIN_NAME = process.env.REACT_APP_DOMAIN_NAME || process.env.DOMAIN_NAME;
+
+axios.defaults.baseURL = String(DOMAIN_NAME);
+
 const _fetchProducts = () => {
     return {
         type: FETCH
@@ -22,7 +26,7 @@ export const fetch = () => {
     return function(dispatch) {
         dispatch(_fetchProducts());
 
-        return axios.get(path.join(String(process.env.DOMAIN_NAME), 'products', 'sephora'))
+        return axios.get(path.join('products', 'sephora'))
             .then(prods => {
                 dispatch(_fetchedProducts(prods));
             })
