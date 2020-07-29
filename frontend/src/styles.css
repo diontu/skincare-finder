@@ -1,0 +1,89 @@
+.title-bar {
+    position: fixed;
+    right: 0;
+    left: 0;
+    z-index: 999;
+    background-color: white;
+    border-bottom-width: 1px;
+    border-bottom-style: inset;
+    border-bottom-color: lightgray;
+    padding: 20px 20px 20px 20px;
+    text-align: center;
+    font-size: large;
+}
+
+.header-logo {
+
+}
+
+.header-title {
+    font-size: large;
+    font-weight: bold;
+    float: left;
+    text-decoration: none;
+    color: black;
+}
+
+.body {
+    padding: 100px 15px 15px 15px;
+}
+
+.header-links-right {
+    float: right;
+}
+
+.header-link{
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    margin: 15px;
+    padding: 2px;
+}
+
+.header-link:hover {
+    color: black;
+    border-bottom: 1px inset green;
+}
+
+.header-logo {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.product-card {
+    border: 1px solid black;
+}
+
+.search-bar {
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    border: 2px solid rgb(40, 138, 40);
+    border-radius: 20px;
+    width: 500px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.search-bar-shadow {
+    box-shadow: 0px 0px 5px 2px rgba(180, 180, 180, 0.75);
+}
+
+.search-bar:hover {
+    box-shadow: 0px 0px 5px 2px rgba(180, 180, 180, 0.75);
+}
+
+.search-bar input {
+    outline: none !important;
+    border: none;
+    padding: 5px 10px 5px 10px;
+    margin: 5px;
+    font-size: 15px;
+    width: 100%;
+}
+
+.search-bar input:focus {
+    outline: none !important;
+    border: 2px solid rgb(37, 202, 37);
+
+}

@@ -1,6 +1,6 @@
 import React from 'react';
 
-function FilterBar() {
+function ToggleFilterBar() {
     return(
         <div>
             
@@ -8,4 +8,4 @@ function FilterBar() {
     );
 }
 
-export default FilterBar;
+export default ToggleFilterBar;

@@ -1,4 +1,4 @@
-import {FETCH, FETCHED} from '../actions/constants';
+import {FETCH, FETCHED, TOGGLE} from '../actions/constants';
 
 export const fetchedProducts = (state = false, action) => {
     switch (action.type) {
@@ -19,3 +19,21 @@ export const products = (state = [], action) => {
             return state;
     }
 };
+
+export const normalSearch = (state = true, action) => {
+    switch (action.type) {
+        case TOGGLE:
+            return !state;
+        default:
+            return state;
+    }
+}
+
+export const careSearch = (state = false, action) => {
+    switch (action.type) {
+        case TOGGLE:
+            return !state;
+        default:
+            return state;
+    }
+}

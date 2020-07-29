@@ -6,6 +6,13 @@ import { connect } from 'react-redux';
 
 import Loading from './components/Loading';
 
+import TitleBar from './components/title-bar';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+
+import Home from './routes/home/Home';
+import Product from './routes/product/Product';
+import Contact from './routes/contact/Contact';
+
 function App(props) {
 
   // having the empty array as the second param makes it only run once
@@ -13,12 +20,18 @@ function App(props) {
     props.fetchProds();
   }, []);
 
-  const products = useSelector(state => state.products); // takes the products from the state
-  const isLoaded = useSelector(state => state.hasFetchedProducts); // gets the state of the 
+  const isLoaded = useSelector(state => state.hasFetchedProducts); // gets the state of the loader
 
   return !isLoaded ? <Loading/> : (
-    <div className="App">
-      dcc
+    <div>
+      <Router>
+        <TitleBar/>
+        <Switch>
+          <Route path="/" exact component={Home}/>
+          <Route path="/product/:id" component={Product}/>
+          <Route path="/contact" component={Contact}/>
+        </Switch>
+      </Router>
     </div>
   );
 }

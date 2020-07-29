@@ -1,15 +1,15 @@
-import {FETCH, FETCHED} from './constants';
+import {FETCH, FETCHED, TOGGLE} from './constants';
 
 const path = require('path');
 const axios = require('axios');
 
 require('dotenv').config({path: '../../../../.env'});
 
-var DOMAIN_NAME = process.env.REACT_APP_DOMAIN_NAME;
+//TODO: following is used for development
+const DOMAIN_NAME = process.env.REACT_APP_DOMAIN_NAME;
 
-if (process.env.MODE === 'prod') {
-    DOMAIN_NAME = process.env.DOMAIN_NAME;
-}
+//TODO: uncomment when use for production
+// var DOMAIN_NAME = process.env.DOMAIN_NAME;
 
 axios.defaults.baseURL = String(DOMAIN_NAME);
 
@@ -39,3 +39,9 @@ export const fetch = () => {
             });
     };
 };
+
+export const toggleSearch = () => {
+    return {
+        type: TOGGLE
+    };
+}
