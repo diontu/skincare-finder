@@ -6,12 +6,16 @@ const axios = require('axios');
 require('dotenv').config({path: '../../../../.env'});
 
 //TODO: following is used for development
-const DOMAIN_NAME = process.env.REACT_APP_DOMAIN_NAME;
+var domainName = process.env.REACT_APP_DOMAIN_NAME;
 
 //TODO: uncomment when use for production
 // var DOMAIN_NAME = process.env.DOMAIN_NAME;
 
-axios.defaults.baseURL = String(DOMAIN_NAME);
+if (typeof domainName === 'undefined') {
+    domainName = process.env.DOMAIN_NAME;
+}
+
+axios.defaults.baseURL = String(domainName);
 
 const _fetchProducts = () => {
     return {

@@ -26,6 +26,7 @@
 
 .body {
     padding: 100px 15px 15px 15px;
+    text-align: center;
 }
 
 .header-links-right {
@@ -65,15 +66,29 @@
     margin-left: auto;
 }
 
-.search-bar-shadow {
+.search-bar-focused {
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    border: 2px solid rgb(67, 202, 67);
+    border-radius: 20px;
+    width: 500px;
+    margin-right: auto;
+    margin-left: auto;
     box-shadow: 0px 0px 5px 2px rgba(180, 180, 180, 0.75);
 }
 
 .search-bar:hover {
+    border: 2px solid rgb(67, 202, 67);
     box-shadow: 0px 0px 5px 2px rgba(180, 180, 180, 0.75);
 }
 
-.search-bar input {
+.search-bar-focused:hover {
+    border: 2px solid rgb(67, 202, 67);
+    box-shadow: 0px 0px 5px 2px rgba(180, 180, 180, 0.75);
+}
+
+.search-bar-input{
     outline: none !important;
     border: none;
     padding: 5px 10px 5px 10px;
@@ -82,8 +97,113 @@
     width: 100%;
 }
 
-.search-bar input:focus {
+.search-bar-input:focus {
     outline: none !important;
-    border: 2px solid rgb(37, 202, 37);
+}
 
+.center {
+    align-items: center;
+    padding: 30px;
+}
+
+.switch {
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    display: block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: rgb(67, 202, 67);
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px rgb(67, 202, 67);
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+.products-body {
+    display: flex;
+    overflow: auto;
+    padding: 50px;
+}
+
+.product {
+    border: 1px none gray;
+    overflow: hidden;
+    width: 200px;
+    height: 235px; 
+    padding: 10px;
+    border-radius: 20px;
+    box-shadow: 1px 1px 5px 2px rgba(180, 180, 180, 0.75);
+}
+
+.product-image {
+    margin: 10px;
+    border: 1px solid black;
+    width: 180px;
+    height: 140px;
+}
+
+.no-text-dec {
+    text-decoration: none;
+}
+
+.product-descr {
+    font-size: small;
+}
+
+.product-brand {
+    margin: 5px;
+    color: lightslategray
+}
+
+.product-ratings {
+    font-size: small;
 }
