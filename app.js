@@ -31,7 +31,6 @@ connection.once('open', () => {
 // api routes
 app.use('/products', productsRouter);
 
-
 app.listen(PORT, () => {
     console.log('Connected to PORT: ' + PORT);
 });

@@ -168,18 +168,27 @@ input:checked + .slider:before {
     border-radius: 50%;
 }
 
+.space-inbetween {
+    margin: 10px;
+}
+
 .products-body {
     display: flex;
-    overflow: auto;
+    flex-wrap: wrap;
+    overflow: hidden;
     padding: 50px;
+    justify-content: center;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 .product {
     border: 1px none gray;
     overflow: hidden;
     width: 200px;
-    height: 235px; 
+    height: 250px; 
     padding: 10px;
+    margin: 5px;
     border-radius: 20px;
     box-shadow: 1px 1px 5px 2px rgba(180, 180, 180, 0.75);
 }

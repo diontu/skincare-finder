@@ -20,7 +20,11 @@ function Home() {
             <ToggleFilterBar />
             <SearchBar />
             <div className="products-body">
-                <Link to={linkURL} className="no-text-dec"><ProductCard productInfo={products.data[0]}/></Link>
+                {products.data.map(product => (
+                    <div className="space-inbetween">
+                        <Link to={'/product/' + product.skuId} className="no-text-dec"><ProductCard productInfo={product}/></Link>
+                    </div>
+                ))}
             </div>
         </div>
     );
