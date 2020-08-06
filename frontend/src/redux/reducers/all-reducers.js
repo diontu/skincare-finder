@@ -1,4 +1,4 @@
-import { fetchedProducts, products, normalSearch, careSearch, searchValue, searchResults } from './fetched-products-reducer';
+import { fetchedProducts, products, normalSearch, careSearch, searchValues, searchResults, loadedSearchResults, productsIngredients, fetchingIngredients } from './fetched-products-reducer';
 
 import { combineReducers } from 'redux';
 
@@ -7,8 +7,11 @@ const allReducers = combineReducers({
     products,
     normalSearch,
     careSearch,
-    searchValue,
-    searchResults //have not used yet
+    searchValues,
+    searchResults, 
+    loadedSearchResults,
+    productsIngredients,
+    fetchingIngredients
 });
 
 export default allReducers;

@@ -1,4 +1,4 @@
-import {FETCH, FETCHED, TOGGLE, UPDATESEARCH, UPDATESEARCHRESULTS} from './constants';
+import {FETCH, FETCHED, TOGGLE, UPDATESEARCH, UPDATESEARCHRESULTS, SEARCHLOADED, SEARCHNOTLOADED, FETCHINGREDIENTS, FETCHEDINGREDIENTS} from './constants';
 
 const path = require('path');
 const axios = require('axios');
@@ -29,7 +29,7 @@ const _fetchedProducts = (prods) => {
     };
 };
 
-export const fetch = () => {
+export const fetchInitial = () => {
 
     var domainName = process.env.REACT_APP_DOMAIN_NAME;
 
@@ -44,6 +44,7 @@ export const fetch = () => {
         return axios.get(path.join('products', 'sephora'))
             .then(prods => {
                 dispatch(_fetchedProducts(prods));
+                dispatch(updateSearchResults(prods.data));
             })
             .catch(err => {
                 console.log(err);
@@ -57,6 +58,7 @@ export const toggleSearch = () => {
     };
 };
 
+//@param searchValue - must be an array of the search values
 export const updateSearchValue = (searchValue) => {
     return { 
         type: UPDATESEARCH,
@@ -64,27 +66,68 @@ export const updateSearchValue = (searchValue) => {
     };
 };
 
-//@param results - must be an array of strings of the search results.
-const _updateSearchResults = (results) => {
+//@param results - must be an array of strings of the search results. -- NOT USED
+export const updateSearchResults = (results) => {
     return {
         type: UPDATESEARCHRESULTS,
         payload: results
     };
 }
 
-export const findProductsWithIngredients = (skuId) => {
+export const searchLoaded = () => {
+    return {
+        type: SEARCHLOADED,
+    };
+}
 
-    var domainName = process.env.REACT_APP_BASE_SEPHORA_DOMAIN;
+export const searchNotLoaded = () => {
+    return {
+        type: SEARCHNOTLOADED,
+    };
+}
+
+const _fetchingIngredients = () => {
+    return {
+        type: FETCHINGREDIENTS,
+    };
+}
+
+const _fetchedIngredients = (productIngredients) => {
+    return {
+        type: FETCHEDINGREDIENTS,
+        payload: productIngredients
+    };
+}
+
+// TODO: have this function return an array of object with all the products and which ingredients they match using an array.
+// TODO: ONLY update the SEARCHRESULTS if all have matched the ingredients
+
+
+//The above solution requires n times the amount of api calls... not good.
+//Another solution is to get all the ingredients from each of the products and compare them here and 
+//return the results for each of the products.
+//cannot pass the array of search values to backend, so might be better to do comparison on frontend
+export const findAllProductsWithIngredients = () => {
+    var domainName = process.env.REACT_APP_DOMAIN_NAME;
 
     if (typeof domainName === 'undefined') {
-        domainName = process.env.BASE_SEPHORA_DOMAIN;
+        domainName = process.env.DOMAIN_NAME;
     }
     axios.defaults.baseURL = String(domainName);
 
     return function(dispatch) {
         //calls the backend 
         //SOLUTION: put the initial products into the database and look through the database with the API call based off of skuId
-        return axios.get(path.join('sephora', 'ingredients', skuId));
-        //update the search results with _updateSearchResults at the end
+        
+        dispatch(_fetchingIngredients());
+
+        return axios.get(path.join('products', 'sephora', 'ingredients', 'all'))
+            .then(productIngredients => {
+                dispatch(_fetchedIngredients(productIngredients));
+            })
+            .catch(err => {
+                console.log(err);
+            });
+        //update the search results with _updateSearchResults at services.js
     };
 }

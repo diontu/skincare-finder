@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import './App.css';
 import { useSelector } from 'react-redux';
-import { fetch } from './redux/actions/products-actions';
+import { fetchInitial, findAllProductsWithIngredients } from './redux/actions/products-actions';
 import { connect } from 'react-redux';
 
 import Loading from './components/Loading';
@@ -12,17 +12,20 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Home from './routes/home/Home';
 import Product from './routes/product/Product';
 import Contact from './routes/contact/Contact';
+import { matchSearchValuesWithIngredients } from './models/services/services';
 
 function App(props) {
 
   // having the empty array as the second param makes it only run once
   useEffect(() => {
-    props.fetchProds();
+    props.fetchProdsInitial();
+    props.fetchIngredients();
   }, []);
 
-  const isLoaded = useSelector(state => state.hasFetchedProducts); // gets the state of the loader
+  const isLoadedProducts = useSelector(state => state.hasFetchedProducts); // gets the state of the loader
+  const isLoadingIngredients = useSelector(state => state.fetchingIngredients);
 
-  return !isLoaded ? <Loading/> : (
+  return !isLoadedProducts || isLoadingIngredients? <Loading/> : (
     <div>
       <Router>
         <TitleBar/>
@@ -44,8 +47,11 @@ function App(props) {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchProds: () => {
-      dispatch(fetch());
+    fetchProdsInitial: () => {
+      dispatch(fetchInitial());
+    },
+    fetchIngredients: () => {
+      dispatch(findAllProductsWithIngredients());
     }
   };
 };

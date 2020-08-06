@@ -7,12 +7,12 @@ require('dotenv').config({path: '../.env'});
 
 function ProductCard({productInfo}) {
 
-    var baseURL = process.env.REACT_APP_BASE_SEPHORA_DOMAIN;
+    var baseURL = process.env.REACT_APP_SEPHORA_DOMAIN;
     if (typeof baseURL === 'undefined') {
         baseURL = process.env.BASE_SEPHORA_DOMAIN;
     }
 
-    const imageFullURL = path.join(baseURL, productInfo.image);
+    const imageFullURL = path.join(String(baseURL), String(productInfo.image));
 
     //TODO: have stars for the ratings and change the color of the links
     //TODO: have the items actually filter the items 

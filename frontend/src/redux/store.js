@@ -7,4 +7,6 @@ const logger = createLogger();
 
 const middleware = applyMiddleware(thunk, logger);
 
-export default createStore(reducers, middleware);
+const store = createStore(reducers, middleware);
+
+export default store;

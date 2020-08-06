@@ -2,6 +2,7 @@ import React, { createRef } from 'react';
 import '../styles.css';
 import { connect } from 'react-redux';
 import { toggleSearch, updateSearchValue } from '../redux/actions/products-actions';
+import { matchSearchValuesWithProductName, matchSearchValuesWithIngredients } from '../models/services/services';
 
 class SearchBar extends React.Component {
 
@@ -14,7 +15,7 @@ class SearchBar extends React.Component {
         };
         this.searchInFocus = this.searchInFocus.bind(this);
         this.searchNotInFocus = this.searchNotInFocus.bind(this);
-        this._handleKeyDown = this._handleKeyDown.bind(this);
+        this._handleKeyDownOrButtonPress = this._handleKeyDownOrButtonPress.bind(this);
     }
     
     searchInFocus() {
@@ -29,23 +30,30 @@ class SearchBar extends React.Component {
         });
     }
 
-    _handleKeyDown(event) {
+    _handleKeyDownOrButtonPress(event) {
         if (event.key === 'Enter') {
+
+            //should parse the input so that One could input multiple ingredients and filter for them
+
             // begin searching using the input from the search bar
-            this.props.updateSearch(event.target.value);
-            this.state.inputRef.current.blur()
-            if (this.props.careSearch) {
+            this.props.updateSearch([event.target.value]);
+            this.state.inputRef.current.blur();
+
+            //force rerender
+            if (this.props.state.careSearch) {
                 //perform a care search
                 // perform an action to make an api call on all the targetURL to return the search Results
+                this.props.matchWithProductIngredients();
             } 
             else {
                 //perform a reg search
+                this.props.matchWithProductName();
             }
         }
     }
 
     render() {
-        console.log(this.state);
+        console.log(this.props.state);
         return (
             <div className={this.state.searchFocused? "search-bar-focused" : "search-bar"}>
                 <input className="search-bar-input" 
@@ -54,7 +62,7 @@ class SearchBar extends React.Component {
                     placeholder={this.props.state.careSearch? "Search Ingredient" : "Search Item"} 
                     onFocus={this.searchInFocus} 
                     onBlur={this.searchNotInFocus}
-                    onKeyDown={this._handleKeyDown}/>
+                    onKeyDown={this._handleKeyDownOrButtonPress}/>
             </div>
         );
     }
@@ -70,7 +78,13 @@ function mapDispatchToProps(dispatch) {
     return {
         updateSearch: (searchVal) => {
             dispatch(updateSearchValue(searchVal));
-        } 
+        },
+        matchWithProductName: () => {
+            dispatch(matchSearchValuesWithProductName());
+        },
+        matchWithProductIngredients: () => {
+            dispatch(matchSearchValuesWithIngredients());
+        }  
     };
 }
 

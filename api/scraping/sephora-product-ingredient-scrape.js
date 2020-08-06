@@ -11,7 +11,9 @@ async function findIngredientsForProduct(targetURL) {
     const script = parser(html);
     const JSONScript = JSON.parse(script);
     const ingredientDescHtml = _extractContentItems(JSONScript);
+    // console.log(targetURL); //---- comment
     const ingredients = _extractIngredients(ingredientDescHtml);
+    // return ingredientDescHtml; // ------ comment
     return ingredients;
 }
 
@@ -30,19 +32,41 @@ const _extractIngredients = (ingredientDescHtml) => {
     let firstMatch = getFirstMatchIngredients(ingredientDescHtml);
     let secondMatch = getSecondMatchIngredients(ingredientDescHtml);
 
+    // console.log([...firstMatch, ...secondMatch]);
     return [...firstMatch, ...secondMatch];
 };
 
 const getFirstMatchIngredients = (ingredientDescHtml) => {
-    let firstMatch = ingredientDescHtml.match(/[-]([1-9a-zA-Z-%()\s]*):/g); //working... i hope
+    // console.log(ingredientDescHtml);
+    let firstMatch = ingredientDescHtml.match(/[\s<>]+[-]([1-9a-zA-Z-%(),.\s]*):/g); //working... i hope
+    if (firstMatch == null) return []; 
     firstMatch = firstMatch.map(match => match.substring(1, match.length-1).trim());
+    // console.log(firstMatch);
     return firstMatch;
 };
 
 const getSecondMatchIngredients = (ingredientDescHtml) => {
-    let secondMatchString = ingredientDescHtml.match(/<br><br>(.*\s)<br>/).pop(); //working... i hope
-    let intermediarySecondMatch = secondMatchString.match(/[-\/()\w\s]*[,.]/g);
-    let secondMatch = intermediarySecondMatch.map(match => match.substring(0, match.length-1).trim());
+    //might replace the following regex with one that LOOKSAHEAD (https://stackoverflow.com/questions/47640868/javascript-match-regular-expression-with-reverse-quantifier-or-parse-right-to)
+    let secondMatchString = ingredientDescHtml.match(/<br>[\s]*<br>(.*\n*.*)[<br><br>]*/g); //working... i hope
+    let secondMatch;
+    try { 
+        if (secondMatchString != null) {
+            // console.log(secondMatchString); // ----- comment
+            secondMatchString = secondMatchString.pop();
+            // console.log(secondMatchString); // ----- comment
+            let intermediarySecondMatch = secondMatchString.match(/[-\/()\w\s\*]*[,.]/g);
+            // console.log(intermediarySecondMatch); // ----- comment
+            secondMatch = intermediarySecondMatch.map(match => match.substring(0, match.length-1).trim());
+    
+        } 
+        else {
+            let intermediarySecondMatch = ingredientDescHtml.match(/[-\/()\w\s\*]*[,.]/g);
+            secondMatch = intermediarySecondMatch.map(match => match.substring(0, match.length-1).trim());
+        }
+    } catch (err) {
+        console.error(err);
+        return [];
+    }
     return secondMatch;
 };
 
