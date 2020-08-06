@@ -72,7 +72,9 @@ export const matchSearchValuesWithIngredients = () => {
                     }
                 });
             })
-            searchResults.push(data);
+            if (data.matches.length != 0)  {
+                searchResults.push(data);
+            }
         });
 
         dispatch(updateSearchResults(searchResults));

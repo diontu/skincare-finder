@@ -1,5 +1,6 @@
 import React from 'react';
 import './../styles.css';
+import FadeIn from 'react-fade-in';
 
 const path = require('path');
 
@@ -21,14 +22,16 @@ function ProductCard({productInfo}) {
     //TODO: if no products fits all the ingredients, find and suggest products with at least few of those ingredients
     //TODO: filter for the ingredients WITHOUT that doesn't contain SPECIFIC ingredients
     return (
-        <div className="product">
-            <div className="product-image">
-                <img src={imageFullURL} alt={productInfo.productName + ' image'}/>
+        <FadeIn>
+            <div className="product">
+                <div className="product-image">
+                    <img src={imageFullURL} alt={productInfo.productName + ' image'}/>
+                </div>
+                <div className="product-descr">{productInfo.productName}</div>
+                <div className="product-brand">{productInfo.brandName}</div>
+                <div className="product-ratings">Ratings + Amount of Ratings</div>
             </div>
-            <div className="product-descr">{productInfo.productName}</div>
-            <div className="product-brand">{productInfo.brandName}</div>
-            <div className="product-ratings">Ratings + Amount of Ratings</div>
-        </div>
+        </FadeIn>
     );
 }
 

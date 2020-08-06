@@ -16,6 +16,11 @@ class Home extends React.Component {
         super(props);
     }
 
+    //forces a re-render after an change in state occurs
+    componentDidUpdate() {
+        this.setState();
+    }
+
     // --------------------- 1.  must get the fade in after each search -----------------------------
     // --------------------- 2.  get the ingredient search working (rn shows all the ingredients) ------------------------------------
     render() {
@@ -24,17 +29,14 @@ class Home extends React.Component {
                 <h1>Find the right Skincare Product for you</h1>
                 <ToggleFilterBar />
                 <SearchBar />
-                {!this.props.state.loadedSearchResults? <Loading/> : (
-                    <FadeIn> 
-                        
-                        <div className="products-body">
-                            {this.props.state.searchResults.map(product => (
-                                <div className="space-inbetween">
-                                    <Link to={'/product/' + product.skuId} className="no-text-dec"><ProductCard productInfo={product}/></Link>
-                                </div>
-                            ))}
-                        </div>
-                    </FadeIn>
+                {!this.props.state.loadedSearchResults? <Loading/> : ( 
+                    <div className="products-body">
+                        {this.props.state.searchResults.map(product => (
+                            <div className="space-inbetween">
+                                <Link to={'/product/' + product.skuId} className="no-text-dec"><ProductCard productInfo={product}/></Link>
+                            </div>
+                        ))}
+                    </div>
                 )}
             </div>
         );
