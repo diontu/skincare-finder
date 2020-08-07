@@ -20,6 +20,7 @@ class Contact extends React.Component {
         this.emailInFocus = this.emailInFocus.bind(this);
         this.messageNotInFocus = this.messageNotInFocus.bind(this);
         this.messageInFocus = this.messageInFocus.bind(this); 
+        this.submitEmail = this.submitEmail.bind(this);
     }
 
     nameNotInFocus() {
@@ -59,6 +60,9 @@ class Contact extends React.Component {
     }
 
     submitEmail() {
+
+        //send the info and etc. to the backend with an axios call
+
         this.setState({
             focusedName: false,
             focusedEmail: false,
@@ -79,23 +83,29 @@ class Contact extends React.Component {
                         <input className="box-input" 
                             type="text" 
                             placeholder="Name"
+                            value={this.state.name}
                             onFocus={this.nameInFocus}
                             onBlur={this.nameNotInFocus}
+                            onChange={event => this.setState({name: event.target.value})}
                         />
                     </div>
                     <div className={this.state.focusedEmail? "focused-box" : "not-focused-box"}>
                         <input className="box-input" 
                             type="text"
                             placeholder="Email"
+                            value={this.state.email}
                             onFocus={this.emailInFocus}
                             onBlur={this.emailNotInFocus}
+                            onChange={event => this.setState({email: event.target.value})}
                         />
                     </div>
                     <div className={this.state.focusedMessage? "focused-box" : "not-focused-box"}>
                         <textarea className="message-box-input"
                             placeholder="Message"
+                            value={this.state.message}
                             onFocus={this.messageInFocus}
                             onBlur={this.messageNotInFocus}
+                            onChange={event => this.setState({message: event.target.value})}
                         />
                     </div>
                     <button onClick={this.submitEmail}>Submit</button>
