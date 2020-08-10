@@ -31,10 +31,10 @@ const _fetchedProducts = (prods) => {
 
 export const fetchInitial = () => {
 
-    var domainName = process.env.REACT_APP_DOMAIN_NAME;
+    var domainName = process.env.DOMAIN_NAME;
 
     if (typeof domainName === 'undefined') {
-        domainName = process.env.DOMAIN_NAME;
+        domainName = process.env.REACT_APP_DOMAIN_NAME;
     }
     axios.defaults.baseURL = String(domainName);
 
@@ -108,10 +108,10 @@ const _fetchedIngredients = (productIngredients) => {
 //return the results for each of the products.
 //cannot pass the array of search values to backend, so might be better to do comparison on frontend
 export const findAllProductsWithIngredients = () => {
-    var domainName = process.env.REACT_APP_DOMAIN_NAME;
+    var domainName = process.env.DOMAIN_NAME;
 
     if (typeof domainName === 'undefined') {
-        domainName = process.env.DOMAIN_NAME;
+        domainName = process.env.REACT_APP_DOMAIN_NAME;
     }
     axios.defaults.baseURL = String(domainName);
 
@@ -134,10 +134,10 @@ export const findAllProductsWithIngredients = () => {
 
 export const sendEmailAction = ({name, email, message}) => {
     //here is where i make the axios post call
-    var domainName = process.env.REACT_APP_DOMAIN_NAME;
+    var domainName = process.env.DOMAIN_NAME;
 
     if (typeof domainName === 'undefined') {
-        domainName = process.env.DOMAIN_NAME;
+        domainName = process.env.REACT_APP_DOMAIN_NAME;
     }
     axios.defaults.baseURL = String(domainName);
 
