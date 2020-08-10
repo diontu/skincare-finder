@@ -36,7 +36,7 @@ export const fetchInitial = () => {
     if (typeof domainName === 'undefined') {
         // domainName = process.env.REACT_APP_DOMAIN_NAME; //--- uncomment for development
     }
-    axios.defaults.baseURL = String(domainName);
+    // axios.defaults.baseURL = String(domainName); //--- uncomment for development
 
     return function(dispatch) {
         dispatch(_fetchProducts());
@@ -105,7 +105,7 @@ export const findAllProductsWithIngredients = () => {
     if (typeof domainName === 'undefined') {
         // domainName = process.env.REACT_APP_DOMAIN_NAME; //--- uncomment for development
     }
-    axios.defaults.baseURL = String(domainName);
+    // axios.defaults.baseURL = String(domainName); //--- uncomment for development
 
     return function(dispatch) {
         dispatch(_fetchingIngredients());
@@ -128,7 +128,7 @@ export const sendEmailAction = ({name, email, message}) => {
     if (typeof domainName === 'undefined') {
         // domainName = process.env.REACT_APP_DOMAIN_NAME; //--- uncomment for development
     }
-    axios.defaults.baseURL = String(domainName);
+    // axios.defaults.baseURL = String(domainName); //--- uncomment for development
 
     console.log('entered email');
 
