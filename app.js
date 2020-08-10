@@ -13,14 +13,14 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json()); // parses JSON requests and places them in request.body
 
+// api routes
+app.use('/api/products', productsRouter);
+app.use('/api/contact', contactRouter);
+
 if (process.env.MODE === 'prod') {
     app.use(express.static(path.join(__dirname, 'frontend', 'build')));
 
-    app.get('/', (req, res) => {
-        res.sendFile(path.join(__dirname, 'frontend', 'build', 'index.html'));
-    });
-
-    app.get('/contact', (req, res) => {
+    app.get('/*', (req, res) => {
         res.sendFile(path.join(__dirname, 'frontend', 'build', 'index.html'));
     });
 }
@@ -32,10 +32,6 @@ const connection = mongoose.connection;
 connection.once('open', () => {
     console.log('Connected to MongoDB...');
 });
-
-// api routes
-app.use('/products', productsRouter);
-app.use('/contact', contactRouter);
 
 app.listen(PORT, () => {
     console.log('Connected to PORT: ' + PORT);

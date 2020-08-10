@@ -41,7 +41,7 @@ export const fetchInitial = () => {
     return function(dispatch) {
         dispatch(_fetchProducts());
 
-        return axios.get(path.join('products', 'sephora'))
+        return axios.get(path.join('api', 'products', 'sephora'))
             .then(prods => {
                 dispatch(_fetchedProducts(prods));
                 dispatch(updateSearchResults(prods.data));
@@ -110,7 +110,7 @@ export const findAllProductsWithIngredients = () => {
     return function(dispatch) {
         dispatch(_fetchingIngredients());
 
-        return axios.get(path.join('products', 'sephora', 'ingredients', 'all'))
+        return axios.get(path.join('api', 'products', 'sephora', 'ingredients', 'all'))
             .then(productIngredients => {
                 dispatch(_fetchedIngredients(productIngredients));
             })
@@ -134,7 +134,7 @@ export const sendEmailAction = ({name, email, message}) => {
 
     return async dispatch => {
         // set the state of SENDINGEMAIL to true and use this state to load the loading overlay
-        await axios.post(path.join('contact', 'send'), {name, email, message})
+        await axios.post(path.join('api', 'contact', 'send'), {name, email, message})
             .then((res) => {
                 console.log('entered req');
             })
