@@ -1,6 +1,8 @@
 import React from 'react';
 import '../../styles.css';
 import FadeIn from 'react-fade-in';
+import { connect } from 'react-redux';
+import { sendEmail } from './../../models/services/services';
 
 class Contact extends React.Component {
     constructor(props) {
@@ -62,6 +64,14 @@ class Contact extends React.Component {
     submitEmail() {
 
         //send the info and etc. to the backend with an axios call
+        const name = this.state.name;
+        const email = this.state.email;
+        const message = this.state.message;
+        this.props.dispatchSendEmail({
+            name,
+            email,
+            message
+        });
 
         this.setState({
             focusedName: false,
@@ -115,4 +125,12 @@ class Contact extends React.Component {
     }
 }
 
-export default Contact;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        dispatchSendEmail: (info) => {
+            dispatch(sendEmail(info));
+        }
+    };
+};
+
+export default connect(null, mapDispatchToProps)(Contact);

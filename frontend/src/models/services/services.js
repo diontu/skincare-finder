@@ -1,6 +1,7 @@
-import {findAllProductsWithIngredients} from './../../redux/actions/products-actions';
 import {searchLoaded, searchNotLoaded, updateSearchResults} from './../../redux/actions/products-actions';
 import store from './../../redux/store';
+import path from 'path';
+import axios from 'axios';
 
 //all these services are redux-actions.
 
@@ -80,4 +81,27 @@ export const matchSearchValuesWithIngredients = () => {
         dispatch(updateSearchResults(searchResults));
         dispatch(searchLoaded());
     };
-}
+};
+
+export const sendEmail = ({name, email, message}) => {
+    //here is where i make the axios post call
+    var domainName = process.env.REACT_APP_DOMAIN_NAME;
+
+    if (typeof domainName === 'undefined') {
+        domainName = process.env.DOMAIN_NAME;
+    }
+    axios.defaults.baseURL = String(domainName);
+
+    console.log('entered email');
+
+    return async dispatch => {
+        // set the state of SENDINGEMAIL to true and use this state to load the loading overlay
+        await axios.post(path.join('contact', 'send'), {name, email, message})
+            .then((res) => {
+                console.log('entered req');
+            })
+            .catch((err) => {
+
+            });
+    };
+};

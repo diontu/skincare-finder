@@ -67,6 +67,6 @@ router.route('/sephora/ingredients/all').get(async (req, res) => {
     // const ingredients = await productIngredientScraper.findIngredientsForProduct('/product/the-water-cream-P418218');
     res.set('Content-type', 'application/json');
     res.json(allIngredients);
-});
+}); 
 
 module.exports = router;

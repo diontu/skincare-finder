@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const productsRouter = require('./api/routes/products.route');
+const contactRouter = require('./api/routes/contact.route');
 const path = require('path');
 
 require('dotenv').config();
@@ -30,6 +31,7 @@ connection.once('open', () => {
 
 // api routes
 app.use('/products', productsRouter);
+app.use('/contact', contactRouter);
 
 app.listen(PORT, () => {
     console.log('Connected to PORT: ' + PORT);
