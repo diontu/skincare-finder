@@ -131,3 +131,26 @@ export const findAllProductsWithIngredients = () => {
         //update the search results with _updateSearchResults at services.js
     };
 }
+
+export const sendEmailAction = ({name, email, message}) => {
+    //here is where i make the axios post call
+    var domainName = process.env.REACT_APP_DOMAIN_NAME;
+
+    if (typeof domainName === 'undefined') {
+        domainName = process.env.DOMAIN_NAME;
+    }
+    axios.defaults.baseURL = String(domainName);
+
+    console.log('entered email');
+
+    return async dispatch => {
+        // set the state of SENDINGEMAIL to true and use this state to load the loading overlay
+        await axios.post(path.join('contact', 'send'), {name, email, message})
+            .then((res) => {
+                console.log('entered req');
+            })
+            .catch((err) => {
+
+            });
+    };
+};
