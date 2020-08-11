@@ -33,6 +33,7 @@ connection.once('open', () => {
     console.log('Connected to MongoDB...');
 });
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
     console.log('Connected to PORT: ' + PORT);
 });
+server.timeout = 60000;

@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const sephoraScraper = require('../scraping/sephora-skincare-products-scrape');
 const productIngredientScraper = require('./../scraping/sephora-product-ingredient-scrape');
+const fs = require('fs');
 const ProductModel = require('./../../models/productModel');
 
 // returns JSON of products from all the beauty brands listed
@@ -64,6 +65,7 @@ router.route('/sephora/ingredients/all').get(async (req, res) => {
         data.ingredients = ingredients;
         allIngredients.push(data);
     }
+    
     // const ingredients = await productIngredientScraper.findIngredientsForProduct('/product/the-water-cream-P418218');
     res.set('Content-type', 'application/json');
     res.json(allIngredients);
