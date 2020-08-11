@@ -8,9 +8,9 @@ require('dotenv').config({path: '../.env'});
 
 function ProductCard({productInfo}) {
 
-    var baseURL = process.env.REACT_APP_SEPHORA_DOMAIN;
+    var baseURL = process.env.BASE_SEPHORA_DOMAIN;
     if (typeof baseURL === 'undefined') {
-        baseURL = process.env.BASE_SEPHORA_DOMAIN;
+        // baseURL = process.env.REACT_APP_SEPHORA_DOMAIN; // ------ uncomment in development
     }
 
     const imageFullURL = path.join(String(baseURL), String(productInfo.image));
