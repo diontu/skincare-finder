@@ -1,4 +1,4 @@
-# skincare-finder
+# Skincare Finder
 
 This project was bootstrapped using `create-react-app`.
 
