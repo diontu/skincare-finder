@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const sephoraScraper = require('../scraping/sephora-skincare-products-scrape');
 const productIngredientScraper = require('./../scraping/sephora-product-ingredient-scrape');
-const fs = require('fs');
 const ProductModel = require('./../../models/productModel');
 
 // returns JSON of products from all the beauty brands listed
@@ -12,6 +11,7 @@ const ProductModel = require('./../../models/productModel');
 // returns JSON of products from sephora
 router.route('/sephora').get(async (req, res) => {
     try {
+        console.log('hello');
         const products = await sephoraScraper.getAllItems();
 
         //update the db
